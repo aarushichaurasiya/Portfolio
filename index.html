@@ -172,9 +172,35 @@
   @media (max-width:600px){ .highlights{ grid-template-columns:1fr; } }
   .highlights li{ font-size:14.5px; color:var(--ink-soft); padding-left:20px; position:relative; }
   .highlights li::before{ content:'✦'; position:absolute; left:0; color:var(--primary); font-size:11px; top:4px; }
+  .project-links{ display:flex; gap:10px; flex-wrap:wrap; }
   .project-links a{ font-family:'IBM Plex Mono', monospace; font-size:13px; font-weight:600; text-decoration:none; color:#fff; background:var(--primary);
     padding:9px 16px; border-radius:14px; display:inline-block; box-shadow:5px 5px 12px var(--sd); transition:transform .15s; }
   .project-links a:hover{ transform:translateY(-2px); }
+
+  /* project screenshot gallery */
+  .shot-gallery{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:4px; }
+  @media (max-width:760px){ .shot-gallery{ grid-template-columns:repeat(3,1fr); } }
+  @media (max-width:480px){ .shot-gallery{ grid-template-columns:repeat(2,1fr); } }
+  .shot-thumb{ border-radius:12px; overflow:hidden; aspect-ratio:16/10; cursor:pointer; border:none; padding:0;
+    box-shadow:4px 4px 10px var(--sd), -4px -4px 8px var(--sl); background:var(--bg2); transition:transform .15s; }
+  .shot-thumb:hover{ transform:translateY(-3px) scale(1.02); }
+  .shot-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .shot-label{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft); margin-top:10px; letter-spacing:0.03em; text-transform:uppercase; }
+
+  .lightbox{ position:fixed; inset:0; background:rgba(42,42,71,0.82); z-index:200; display:none;
+    align-items:center; justify-content:center; padding:40px 20px; backdrop-filter:blur(3px); }
+  .lightbox.open{ display:flex; }
+  .lightbox-inner{ max-width:min(920px,92vw); width:100%; }
+  .lightbox-inner img{ width:100%; max-height:78vh; object-fit:contain; border-radius:18px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.35); background:#fff; }
+  .lightbox-cap{ text-align:center; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:13px; margin-top:16px; }
+  .lightbox-close, .lightbox-prev, .lightbox-next{ position:fixed; background:var(--surface); color:var(--primary-dark);
+    border:none; border-radius:50%; width:44px; height:44px; font-size:18px; cursor:pointer;
+    box-shadow:5px 5px 12px rgba(0,0,0,0.25); display:flex; align-items:center; justify-content:center; }
+  .lightbox-close{ top:24px; right:24px; }
+  .lightbox-prev{ left:24px; top:50%; transform:translateY(-50%); }
+  .lightbox-next{ right:24px; top:50%; transform:translateY(-50%); }
+  @media (max-width:640px){ .lightbox-prev{ left:8px; } .lightbox-next{ right:8px; } .lightbox-close{ top:12px; right:12px; } }
 
   .card-row{ display:grid; grid-template-columns:1fr 1fr; gap:24px; position:relative; z-index:1; }
   @media (max-width:760px){ .card-row{ grid-template-columns:1fr; } }
@@ -264,7 +290,7 @@
         <a class="btn btn-outline clay-press" href="#contact">Contact Me</a>
       </div>
       <div class="hero-stats">
-        <div class="stat clay-sm"><b>5</b><span>Projects Built</span></div>
+        <div class="stat clay-sm"><b>6</b><span>Projects Built</span></div>
         <div class="stat clay-sm"><b>20+</b><span>Certifications</span></div>
         <div class="stat clay-sm"><b id="repoCount">—</b><span>GitHub Repos</span></div>
         <div class="stat clay-sm"><b>2027</b><span>Graduating</span></div>
@@ -340,6 +366,34 @@
           <li>Designed and managed the database layer</li>
         </ul>
         <div class="project-links"><a href="https://github.com/aarushichaurasiya" target="_blank" rel="noopener">View on GitHub ↗</a></div>
+      </div>
+
+      <div class="project clay">
+        <div class="project-top">
+          <h3>AVIKA — From Local Kitchens, With Love</h3>
+        </div>
+        <div class="project-tags"><span>MongoDB</span><span>Express</span><span>React</span><span>Node.js</span></div>
+        <p class="desc">A full-stack MERN food delivery platform connecting customers with local home kitchens, with separate React customer and kitchen/admin apps backed by a shared Express + MongoDB API.</p>
+        <ul class="highlights">
+          <li>Built location-based kitchen discovery with MongoDB geospatial queries</li>
+          <li>Implemented cart, checkout, and server-side order pricing</li>
+          <li>Designed role-based access for customers, kitchens, and admins</li>
+          <li>Built kitchen dashboard with order and revenue metrics</li>
+        </ul>
+        <div class="project-links"><a href="https://github.com/aarushichaurasiya/AVIKA" target="_blank" rel="noopener">View on GitHub ↗</a></div>
+        <div class="shot-label">Screenshots</div>
+        <div class="shot-gallery" id="avikaGallery">
+          <button class="shot-thumb" data-idx="0"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/customer-home.png" alt="Customer home screen" loading="lazy"></button>
+          <button class="shot-thumb" data-idx="1"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/customer-kitchen-discovery.png" alt="Kitchen discovery screen" loading="lazy"></button>
+          <button class="shot-thumb" data-idx="2"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/customer-home2.png" alt="Food selection screen" loading="lazy"></button>
+          <button class="shot-thumb" data-idx="3"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/customer-payment.png" alt="Payment screen" loading="lazy"></button>
+          <button class="shot-thumb" data-idx="4"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/customer-orders-history.png" alt="Customer order history" loading="lazy"></button>
+          <button class="shot-thumb" data-idx="5"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/kitchen-dashboard.png" alt="Kitchen dashboard" loading="lazy"></button>
+          <button class="shot-thumb" data-idx="6"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/kitchen-menu-management.png" alt="Kitchen menu management" loading="lazy"></button>
+          <button class="shot-thumb" data-idx="7"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/kitchen-orders.png" alt="Kitchen orders screen" loading="lazy"></button>
+          <button class="shot-thumb" data-idx="8"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/kitchen-confirmed-orders.png" alt="Kitchen confirmed orders" loading="lazy"></button>
+          <button class="shot-thumb" data-idx="9"><img src="https://raw.githubusercontent.com/aarushichaurasiya/AVIKA/main/screenshots/kitchen-employee-roles.png" alt="Kitchen employee and role management" loading="lazy"></button>
+        </div>
       </div>
 
       <div class="project clay">
@@ -476,6 +530,16 @@
   </div>
 </section>
 
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lightbox-prev" id="lbPrev" aria-label="Previous">←</button>
+  <button class="lightbox-next" id="lbNext" aria-label="Next">→</button>
+  <div class="lightbox-inner">
+    <img id="lbImg" src="" alt="">
+    <div class="lightbox-cap" id="lbCap"></div>
+  </div>
+</div>
+
 <footer>Built by Aarushi Chaurasiya · Static site, no frameworks, no build step.</footer>
 
 <script>
@@ -526,6 +590,42 @@
       if(followEl && typeof data.followers === 'number') followEl.textContent = data.followers;
     })
     .catch(()=>{});
+
+  // Screenshot lightbox gallery
+  (function(){
+    const gallery = document.getElementById('avikaGallery');
+    if(!gallery) return;
+    const thumbs = Array.from(gallery.querySelectorAll('.shot-thumb'));
+    const shots = thumbs.map(t => {
+      const img = t.querySelector('img');
+      return { src: img.src, alt: img.alt };
+    });
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    let current = 0;
+
+    function show(i){
+      current = (i + shots.length) % shots.length;
+      lbImg.src = shots[current].src;
+      lbImg.alt = shots[current].alt;
+      lbCap.textContent = shots[current].alt + ' (' + (current+1) + '/' + shots.length + ')';
+    }
+    function open(i){ show(i); lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function close(){ lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+
+    thumbs.forEach((t, i) => t.addEventListener('click', () => open(i)));
+    document.getElementById('lbClose').addEventListener('click', close);
+    document.getElementById('lbPrev').addEventListener('click', () => show(current - 1));
+    document.getElementById('lbNext').addEventListener('click', () => show(current + 1));
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) close(); });
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowLeft') show(current - 1);
+      if(e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
 </script>
 
 </body>
